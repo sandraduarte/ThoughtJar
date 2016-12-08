@@ -90,7 +90,7 @@ app.get('/scrape', function(req, res) {
 });
 
 // this will get the Storys we scraped from the mongoDB
-app.get('/Stories', function(req, res){
+app.get('/stories', function(req, res){
 	// grab every doc in the Storys array
 	Story.find({}, function(err, doc){
 		// log any errors
@@ -105,7 +105,7 @@ app.get('/Stories', function(req, res){
 });
 
 // grab an Story by it's ObjectId
-app.get('/Stories/:id', function(req, res){
+app.get('/stories/:id', function(req, res){
 	// using the id passed in the id parameter, 
 	// prepare a query that finds the matching one in our db...
 	Story.findOne({'_id': req.params.id})
@@ -127,7 +127,7 @@ app.get('/Stories/:id', function(req, res){
 
 // replace the existing thought of an Story with a new one
 // or if no thought exists for an Story, make the posted thought it's thought.
-app.post('/Stories/:id', function(req, res){
+app.post('/stories/:id', function(req, res){
 	// create a new thought and pass the req.body to the entry.
 	var newThought = new Thought(req.body);
 

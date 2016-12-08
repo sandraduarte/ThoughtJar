@@ -10,7 +10,7 @@ $.getJSON('/stories', function(data) {
 
 // whenever someone clicks a p tag
 $(document).on('click', 'p', function(){
-  // empty the thoughts from the note section
+  // empty the thoughts from the thought section
   $('#thoughts').empty();
   // save the id from the p tag
   var thisId = $(this).attr('data-id');
@@ -20,40 +20,40 @@ $(document).on('click', 'p', function(){
     method: "GET",
     url: "/stories/" + thisId,
   })
-    // with that done, add the note information to the page
+    // with that done, add the thought information to the page
     .done(function( data ) {
       console.log(data);
       // the title of the article
       $('#thoughts').append('<h2>' + data.title + '</h2>'); 
       // an input to enter a new title
       $('#thoughts').append('<input id="titleinput" name="title" >'); 
-      // a textarea to add a new note body
+      // a textarea to add a new thought body
       $('#thoughts').append('<textarea id="bodyinput" name="body"></textarea>'); 
-      // a button to submit a new note, with the id of the article saved to it
-      $('#thoughts').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+      // a button to submit a new thought, with the id of the article saved to it
+      $('#thoughts').append('<button data-id="' + data._id + '" id="savethought">Save Thought</button>');
 
-      // if there's a note in the article
-      if(data.note){
-        // place the title of the note in the title input
-        $('#titleinput').val(data.note.title);
-        // place the body of the note in the body textarea
-        $('#bodyinput').val(data.note.body);
+      // if there's a thought in the article
+      if(data.thought){
+        // place the title of the thought in the title input
+        $('#titleinput').val(data.thought.title);
+        // place the body of the thought in the body textarea
+        $('#bodyinput').val(data.thought.body);
       }
     });
 });
 
-// when you click the savenote button
-$(document).on('click', '#savenote', function(){
+// when you click the savethought button
+$(document).on('click', '#savethought', function(){
   // grab the id associated with the article from the submit button
   var thisId = $(this).attr('data-id');
 
-  // run a POST request to change the note, using what's entered in the inputs
+  // run a POST request to change the thought, using what's entered in the inputs
   $.ajax({
     method: "POST",
     url: "/stories/" + thisId,
     data: {
       title: $('#titleinput').val(), // value taken from title input
-      body: $('#bodyinput').val() // value taken from note textarea
+      body: $('#bodyinput').val() // value taken from thought textarea
     }
   })
     // with that done
@@ -64,7 +64,7 @@ $(document).on('click', '#savenote', function(){
       $('#thoughts').empty();
     });
 
-  // Also, remove the values entered in the input and textarea for note entry
+  // Also, remove the values entered in the input and textarea for thought entry
   $('#titleinput').val("");
   $('#bodyinput').val("");
 });

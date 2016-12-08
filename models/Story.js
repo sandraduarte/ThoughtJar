@@ -16,7 +16,7 @@ var StorySchema = new Schema({
     required:true
   },
   // this only saves one note's ObjectId. ref refers to the Note model.
-  note: {
+  thought: {
       type: Schema.Types.ObjectId,
       ref: 'Thought'
   }
