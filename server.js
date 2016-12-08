@@ -51,11 +51,11 @@ app.get('/', function(req, res) {
 // A GET request to scrape the echojs website.
 app.get('/scrape', function(req, res) {
 	// first, we grab the body of the html with request
-  request('http://www.echojs.com/', function(error, response, html) {
+  request('http://borboletabeauty.com/blogs/news', function(error, response, html) {
   	// then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // now, we grab every h2 within an Story tag, and do the following:
-    $('article h2').each(function(i, element) {
+    $('li h2').each(function(i, element) {
 
     		// save an empty result object
 				var result = {};
@@ -63,7 +63,7 @@ app.get('/scrape', function(req, res) {
 				// add the text and href of every link, 
 				// and save them as properties of the result obj
 				result.title = $(this).children('a').text();
-				result.link = $(this).children('a').attr('href');
+				result.link = "http://borboletabeauty.com" + $(this).children('a').attr('href');
 
 				// using our Story model, create a new entry.
 				// Notice the (result):
