@@ -1,22 +1,16 @@
 {
   "name": "thoughtjar",
   "version": "1.0.0",
-  "description": "web app that lets users leave comments",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sandraduarte/ThoughtJar.git"
   },
-  "keywords": [
-    "mongodb",
-    "mongoose",
-    "cheerio",
-    "express"
-  ],
-  "author": "SMD",
+  "author": "sd",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sandraduarte/ThoughtJar/issues"
@@ -27,8 +21,17 @@
     "cheerio": "^0.22.0",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
-    "mongoose": "^4.7.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
     "request": "^2.79.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "mongo",
+    "express",
+    "mongoose",
+    "node"
+  ],
+  "description": ""
 }

@@ -1,4 +1,6 @@
-
+/* Showing Mongoose's "Populated" Method (18.3.8)
+ * INSTRUCTOR ONLY
+ * =============================================== */
 
 // dependencies
 var express = require('express');
@@ -35,9 +37,9 @@ db.once('open', function() {
 });
 
 
-// And we bring in our thought and Story models
-var Thought = require('./models/Thought.js');
-var Story = require('./models/Story.js');
+// And we bring in our Note and Article models
+var Note = require('./models/Note.js');
+var Article = require('./models/Article.js');
 
 
 // Routes
@@ -54,21 +56,22 @@ app.get('/scrape', function(req, res) {
   request('http://borboletabeauty.com/blogs/news', function(error, response, html) {
   	// then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
-    // now, we grab every h2 within an Story tag, and do the following:
+    // now, we grab every h2 within an article tag, and do the following:
     $('li h2').each(function(i, element) {
 
     		// save an empty result object
 				var result = {};
+				var siteURL= 'http://borboletabeauty.com';
 
 				// add the text and href of every link, 
 				// and save them as properties of the result obj
 				result.title = $(this).children('a').text();
-				result.link = "http://borboletabeauty.com" + $(this).children('a').attr('href');
+				result.link = siteURL+$(this).children('a').attr('href');
 
-				// using our Story model, create a new entry.
+				// using our Article model, create a new entry.
 				// Notice the (result):
 				// This effectively passes the result object to the entry (and the title and link)
-				var entry = new Story (result);
+				var entry = new Article (result);
 
 				// now, save that entry to the db
 				entry.save(function(err, doc) {
@@ -89,10 +92,10 @@ app.get('/scrape', function(req, res) {
   res.send("Scrape Complete");
 });
 
-// this will get the Storys we scraped from the mongoDB
-app.get('/stories', function(req, res){
-	// grab every doc in the Storys array
-	Story.find({}, function(err, doc){
+// this will get the articles we scraped from the mongoDB
+app.get('/articles', function(req, res){
+	// grab every doc in the Articles array
+	Article.find({}, function(err, doc){
 		// log any errors
 		if (err){
 			console.log(err);
@@ -104,13 +107,13 @@ app.get('/stories', function(req, res){
 	});
 });
 
-// grab an Story by it's ObjectId
-app.get('/stories/:id', function(req, res){
+// grab an article by it's ObjectId
+app.get('/articles/:id', function(req, res){
 	// using the id passed in the id parameter, 
 	// prepare a query that finds the matching one in our db...
-	Story.findOne({'_id': req.params.id})
+	Article.findOne({'_id': req.params.id})
 	// and populate all of the notes associated with it.
-	.populate('thought')
+	.populate('note')
 	// now, execute our query
 	.exec(function(err, doc){
 		// log any errors
@@ -125,24 +128,24 @@ app.get('/stories/:id', function(req, res){
 });
 
 
-// replace the existing thought of an Story with a new one
-// or if no thought exists for an Story, make the posted thought it's thought.
-app.post('/stories/:id', function(req, res){
-	// create a new thought and pass the req.body to the entry.
-	var newThought = new Thought(req.body);
+// replace the existing note of an article with a new one
+// or if no note exists for an article, make the posted note it's note.
+app.post('/articles/:id', function(req, res){
+	// create a new note and pass the req.body to the entry.
+	var newNote = new Note(req.body);
 
-	// and save the new thought the db
-	newThought.save(function(err, doc){
+	// and save the new note the db
+	newNote.save(function(err, doc){
 		// log any errors
 		if(err){
 			console.log(err);
 		} 
 		// otherwise
 		else {
-			// using the Story id passed in the id parameter of our url, 
-			// prepare a query that finds the matching Story in our db
-			// and update it to make it's lone thought the one we just saved
-			Story.findOneAndUpdate({'_id': req.params.id}, {'thought':doc._id})
+			// using the Article id passed in the id parameter of our url, 
+			// prepare a query that finds the matching Article in our db
+			// and update it to make it's lone note the one we just saved
+			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
 			// execute the above query
 			.exec(function(err, doc){
 				// log any errors
@@ -163,7 +166,7 @@ app.post('/stories/:id', function(req, res){
 
 
 
-// listen on port 5000
-app.listen(5000, function() {
-  console.log('App running on port 5000!');
+// listen on port 3000
+app.listen(3000, function() {
+  console.log('App running on port 3000!');
 });

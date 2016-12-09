@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 // create Schema class
 var Schema = mongoose.Schema;
 
-// Create Story schema
-var StorySchema = new Schema({
+// Create article schema
+var ArticleSchema = new Schema({
   // title is required
   title: {
     type:String,
@@ -16,14 +16,14 @@ var StorySchema = new Schema({
     required:true
   },
   // this only saves one note's ObjectId. ref refers to the Note model.
-  thought: {
+  note: {
       type: Schema.Types.ObjectId,
-      ref: 'Thought'
+      ref: 'Note'
   }
 });
 
-// Create the Story model with the StorySchema
-var Story = mongoose.model('Story', StorySchema);
+// Create the Article model with the ArticleSchema
+var Article = mongoose.model('Article', ArticleSchema);
 
 // export the model
-module.exports = Story;
+module.exports = Article;
