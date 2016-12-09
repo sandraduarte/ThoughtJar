@@ -1,0 +1,54 @@
+<div class="container animated fadeIn">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 loginText">
+        <h1><span class="fa fa-sign-in"></span> SignUp</h1>
+
+        <br>
+        <br>
+
+   <!-- show any messages that come back with authentication-->
+    {{#if message.message}}
+        <div class="alert alert-danger">{{message.message}}</div>
+
+    {{/if}}
+
+    <!-- LOGIN FORM -->
+    <form action="/signup" method="post">
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+
+        <div class="col-lg-2-offset-10">
+            <div class="row text-right" id="addOptions">
+            <button type="submit" class="btn btn-lg">SignUp</button>
+            <br>
+            <br>
+
+            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>Forgot your password?<a href="/forgot"> Reset it</a></p>
+            <p>Or go <a href="/">home</a>.</p>
+            <br>
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+
+        </div>
+    </div>
+</div>

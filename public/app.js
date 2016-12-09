@@ -1,70 +1,76 @@
-// grab the articles as a json
-$.getJSON('/articles', function(data) {
-  // for each one
-  for (var i = 0; i<data.length; i++){
-    // display the apropos information on the page
-    $('#articles').append('<p data-id="' + data[i]._id + '">'+ data[i].title + '<br />'+ data[i].link + '</p>');
-  }
-});
+// Display article's comments when it is clicked
+$(document).on('click', '.article', function(event) {
+    // remove 'selected' class from other articles
+    removeSelected();
+    // apply 'selected' class to highlight article
+    $(this).addClass("selected");
 
+    // clear any comment from other articles
+    $("#comments").empty();
 
-// whenever someone clicks a p tag
-$(document).on('click', 'p', function(){
-  // empty the notes from the note section
-  $('#notes').empty();
-  // save the id from the p tag
-  var thisId = $(this).attr('data-id');
+    // pull the comments for the selected article from the database
+    var articleId = $(this).attr("data-id");
+    $("#commentSubmit").attr("data-article", articleId);
+    $.get("/articles/" + articleId + "/comments", function(comments) {
 
-  // now make an ajax call for the Article
-  $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId,
-  })
-    // with that done, add the note information to the page
-    .done(function( data ) {
-      console.log(data);
-      // the title of the article
-      $('#notes').append('<h2>' + data.title + '</h2>'); 
-      // an input to enter a new title
-      $('#notes').append('<input id="titleinput" name="title" >'); 
-      // a textarea to add a new note body
-      $('#notes').append('<textarea id="bodyinput" name="body"></textarea>'); 
-      // a button to submit a new note, with the id of the article saved to it
-      $('#notes').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+        // once received, append those comments to the DOM
+        for (var i = 0; i < comments.length; i++) {
+          // div for all comment related info
+            var div = $("<div>");
+            div.addClass("comment");
+            div.attr("data-user", comments[i].author);
 
-      // if there's a note in the article
-      if(data.note){
-        // place the title of the note in the title input
-        $('#titleinput').val(data.note.title);
-        // place the body of the note in the body textarea
-        $('#bodyinput').val(data.note.body);
-      }
+            // the text of the comment
+            var commentText = $("<p>");
+            commentText.text(comments[i].text);
+
+            // username of commenter
+            var commentUser = $("<a>");
+            commentUser.attr("href", "/users/" + comments[i].author);
+            commentUser.text(comments[i].author);
+
+            // append elements to the div
+            div.append(commentText);
+            div.append(commentUser);
+
+            // append the div to the comments page
+            $("#comments").append(div);
+        }
     });
+    return false;
 });
 
-// when you click the savenote button
-$(document).on('click', '#savenote', function(){
-  // grab the id associated with the article from the submit button
-  var thisId = $(this).attr('data-id');
+// Make links clickable inside article div
+$('div a').on('click', function(e){
+    e.stopPropagation();
+});
 
-  // run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      title: $('#titleinput').val(), // value taken from title input
-      body: $('#bodyinput').val() // value taken from note textarea
+// When a user submits a comment
+$(document).on('click', '#commentSubmit',function() {
+    var comment = {};
+    // get the article ID
+    var articleId = $(this).attr("data-article");
+    
+    // get the comment text
+    comment.text = $("#commentText").val().trim();
+    // connect the comment to the article in the database
+    comment.article = articleId;
+
+    // make sure the user isn't somehow submitting a comment without an article selected
+    if (comment.article == "none") {
+        console.log("not commenting on an article!");
+    } else {
+        // add the comment to the database via post request
+        $.post("/articles/" + articleId, comment);
     }
-  })
-    // with that done
-    .done(function( data ) {
-      // log the response
-      console.log(data);
-      // empty the notes section
-      $('#notes').empty();
-    });
-
-  // Also, remove the values entered in the input and textarea for note entry
-  $('#titleinput').val("");
-  $('#bodyinput').val("");
 });
+
+
+
+
+
+function removeSelected() {
+    $(".selected").each(function(i) {
+        $(this).removeClass("selected");
+    });
+}

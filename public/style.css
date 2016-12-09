@@ -1,0 +1,128 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.navbar{
+  font-family: 'Questrial', sans-serif;
+
+}
+
+#articlesDiv {
+    height: 10%;
+}
+
+#articleCol {
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.article {
+    border-top: solid 1px #444d5b;
+    z-index: 0;
+}
+
+.articleImg {
+  padding: 0;
+}
+
+.articleTextDiv {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    top: 25px;
+}
+
+.articleTextDiv a {
+    font-size: 14px;
+    color: #fc8005;
+    z-index: 10;
+}
+
+
+/*COMMENTS*************************************************************/
+
+
+/**********************************************************************/
+
+
+/*Add separate scrollbar for comments window*/
+
+#commentCol {
+    overflow-y: auto;
+    height: 100%;
+    font-family: 'Oswald', sans-serif;
+}
+
+#commentCol h2 {
+  margin-top: 0;
+}
+
+#commentCol a {
+  color: #fc8005;
+}
+
+.comment {
+    margin: 10px 0 10px 0;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid black;
+}
+
+#commentSubmit {
+    margin-top: 15px;
+    background-color: #444d5b;
+}
+
+
+/***********************************************************************/
+
+
+/*Highlight article when selected*/
+
+.selected {
+    background-color: #dcedf4;
+}
+
+.article {
+    margin: 10px 0 10px 0;
+}
+
+.float-left {
+    float: left;
+}
+
+
+/*Scrollbars*/
+
+#articleCol::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#articleCol::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#articleCol::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #444d5b;
+}
+
+#commentCol::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#commentCol::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#commentCol::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #444d5b;
+}

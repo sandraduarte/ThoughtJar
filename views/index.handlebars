@@ -1,0 +1,45 @@
+{{navbar}}
+
+<div class="row">
+<div class = "container">
+{{!-- articles
+ --}}
+    <div class="col-lg-6" id="articleCol">
+        {{#each articles}}
+        <div class="row article" data-id=
+        "{{this._id}}" data-link="{{this.link}}">
+            <p>{{this.title}}</p>
+                <a target="blank " href=" {{this.link}} ">Open link in new window!</a>
+           
+        
+            
+            </div>
+        {{/each}}
+    </div><!--Article Column -->
+
+    
+
+    <div class="col-lg-6" id="commentCol">
+        <h2>Comments</h2>
+        <div id="commentsDiv">
+            <div id="commentFormDiv">
+                
+                    <form id="commentForm">
+                        <input class="form-control input-lg col-lg-6" id="commentText" name="text" type="text" />
+                        <button class="btn btn-primary" id="commentSubmit" data-article="none">Submit</button>
+                    </form>
+
+            </div>
+
+            <div id="comments">
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Comment Column -->
+    </div>
+    
+</div>
+<!-- Row -->
