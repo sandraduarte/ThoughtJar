@@ -1,45 +1,60 @@
-{{navbar}}
 
-<div class="row">
-<div class = "container">
-{{!-- articles
+
+{{navbar}}
+<div class = "container-fluid">
+    <div class="row">
+{{!--         <div class = "container">
  --}}
-    <div class="col-lg-6" id="articleCol">
+ {{!-- articles
+ --}}
+
+{{!--  //ARTLCES ON LEFT HALF OF SCREEN
+ --}}<div class="col-md-6" id="articleCol">
         {{#each articles}}
         <div class="row article" data-id=
         "{{this._id}}" data-link="{{this.link}}">
-            <p>{{this.title}}</p>
-                <a target="blank " href=" {{this.link}} ">Open link in new window!</a>
-           
-        
+            <p>{{this.title}}
+
+            <a target="blank " href=" {{this.link}}">View Article</a>
+           </p>
             
-            </div>
+        </div>
         {{/each}}
     </div><!--Article Column -->
 
     
+{{!-- //COMMENTS ON RIGHT HALF OF SCREEN
+ --}}
 
-    <div class="col-lg-6" id="commentCol">
-        <h2>Comments</h2>
+ <div class="col-md-6" id="commentCol" align = "center">
+        <div class = "row1">
         <div id="commentsDiv">
-            <div id="commentFormDiv">
+                <div id="commentFormDiv">
                 
-                    <form id="commentForm">
-                        <input class="form-control input-lg col-lg-6" id="commentText" name="text" type="text" />
-                        <button class="btn btn-primary" id="commentSubmit" data-article="none">Submit</button>
+                    <form id="commentForm" align="center">
+                        <div class = "form-group">
+<label for="commentInput">
+<h1>Comments</h1</label>
+
+
+                        <input type="text"class="form-control input-lg col-lg-6" id="commentText" name="text" placeholder="What is on your mind?" />
+                        </div>
+                        <button type ="submit"class="btn btn-danger btn-lg btn-block" id="commentSubmit"  data-article="none">Submit</button>
                     </form>
+                </div>
+            </div>
+        </div> {{!end container div}}
+        </div>{{!end row}}
+        <div class = "row2">
+             <div class = "col-md-6" align="center">
+                <div id="comments" align='center'>
+                </div>
 
             </div>
+        </div> {{!end row div}}
 
-            <div id="comments">
-
-            </div>
-
-        </div>
+    </div>{{!end RIGHT HALF}}
 
     </div>
     <!-- Comment Column -->
     </div>
-    
-</div>
-<!-- Row -->

@@ -140,7 +140,12 @@ return new Promise (function (resolve, reject) {
          });
     });
   }
-  // tell the browser that we finished scraping the text.
+function isLoggedIn(req, res, next) {
+
+    if (req.user.authenticated)
+        return next();
+    res.redirect('/');
+}
 
 
 module.exports = router;

@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Comment = mongoose.model('Comment');
 var Article = mongoose.model('Article');
-// var models = require('../models');
 var passport = require('passport');
 var crypto = require('crypto');
 

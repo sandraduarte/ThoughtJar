@@ -1,11 +1,14 @@
 html, body {
     height: 100%;
     overflow: hidden;
+    font-family: 'Questrial', sans-serif;
+
 }
 
 .navbar{
   font-family: 'Questrial', sans-serif;
-
+/*  background-color: #FF4040;
+*/
 }
 
 #articlesDiv {
@@ -18,23 +21,21 @@ html, body {
 }
 
 .article {
-    border-top: solid 1px #444d5b;
+    border-top: solid 1px #ffffff;
     z-index: 0;
+    font-color:;
 }
 
-.articleImg {
-  padding: 0;
-}
 
-.articleTextDiv {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
+.article p {
+    font-family: 'Questrial', sans-serif;
+    font-size: 22px;
     top: 25px;
+
 }
 
-.articleTextDiv a {
+.article a {
     font-size: 14px;
-    color: #fc8005;
     z-index: 10;
 }
 
@@ -48,17 +49,24 @@ html, body {
 /*Add separate scrollbar for comments window*/
 
 #commentCol {
-    overflow-y: auto;
-    height: 100%;
-    font-family: 'Oswald', sans-serif;
+/*    overflow-y: auto;
+*/    height: 100%;
+    font-family: 'Questrial', sans-serif;
 }
+/**/
+.row1{
+/*    background-color: #0abab5;
+*/}
+.row2{
+        background-color: #ffdc73;
 
+}
 #commentCol h2 {
   margin-top: 0;
 }
 
 #commentCol a {
-  color: #fc8005;
+  color: #ff4040;
 }
 
 .comment {
@@ -69,8 +77,11 @@ html, body {
 
 #commentSubmit {
     margin-top: 15px;
-    background-color: #444d5b;
-}
+/*    background-color: #444d5b;
+*/}
+#commentJar {
+/*    background-image: url('./clearmasonjar.jpeg');
+*/}
 
 
 /***********************************************************************/
@@ -79,7 +90,7 @@ html, body {
 /*Highlight article when selected*/
 
 .selected {
-    background-color: #dcedf4;
+    background-color: #ffdc73;
 }
 
 .article {

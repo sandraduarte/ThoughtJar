@@ -18,7 +18,10 @@ var CommentSchema = new Schema({
 
   // just a string
   text: {
-    type:String
+    type:String,
+    required: true,
+        trim: true
+
   },
   article: {
     type: Schema.Types.ObjectId,

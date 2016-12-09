@@ -8,15 +8,19 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
+
 //models
 var Comment = require('./models/Comment.js');
 var Article = require('./models/Article.js');
 var User = require("./models/User.js");
+
 //express
 var app = express();
+
 //scrapers
 var request = require('request'); 
 var cheerio = require('cheerio');
+
 //routers
 var articles = require('./controllers/artController.js');
 var users = require('./controllers/user_controller.js');
@@ -64,29 +68,9 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
-
-
-
-
 ///////Set up Handlebars 
 var exphbs = require('express-handlebars');
 
-// var hbs = exphbs.create({
-//     defaultLayout: 'main',
-//     helpers: {
-//       section: function(name, options) {
-//         if (!this._sections) this._sections = {}
-//         this._sections[name] = options.fn(this)
-//         return null
-//       }
-//     }
-//   })
-
-// app.engine('handlebars', hbs.engine)
-// app.set('view engine', 'handlebars')
 var hbs = require('express-handlebars');
 app.engine('handlebars', hbs({
     defaultLayout: 'main',

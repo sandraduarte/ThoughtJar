@@ -46,7 +46,7 @@ $('div a').on('click', function(e){
 });
 
 // When a user submits a comment
-$(document).on('click', '#commentSubmit',function() {
+$("#commentSubmit").on('click',function() {
     var comment = {};
     // get the article ID
     var articleId = $(this).attr("data-article");
