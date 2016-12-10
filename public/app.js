@@ -65,12 +65,19 @@ $("#commentSubmit").on('click',function() {
     }
 });
 
+//when a user clicks on a comment
+$(document).on('click', '.comment', function(event) {
+    // remove 'selected' class from other articles
+    removeSelected();
+    // apply 'selected' class to highlight article
+    $(this).addClass("selected");
 
-
-
+});
 
 function removeSelected() {
     $(".selected").each(function(i) {
         $(this).removeClass("selected");
     });
+
+   
 }

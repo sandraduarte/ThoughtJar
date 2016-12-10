@@ -16,8 +16,26 @@ var router = express.Router();
 
 
 // HOME PAGE
+// router.get('/', function(req, res) {
+//     res.render('login');
+//         });
+
+
+
 router.get('/', function(req, res) {
-    // Scrape the news site to see if there are any new articles
+  
+            // console.log('articles: ' + JSON.stringify(articles));
+            res.redirect('/login');
+          
+        });
+
+
+
+
+
+// this will get the articles we scraped from the mongoDB
+router.get('/articles', function(req, res){
+
     scrape();
     // Pull the articles from the database
     Article.find().lean().sort({ createdAt: -1 }).exec({}, function(error, articles) {
@@ -29,23 +47,6 @@ router.get('/', function(req, res) {
                 articles: articles,
                 user: req.user
             });
-        }
-    });
-});
-
-
-
-
-// this will get the articles we scraped from the mongoDB
-router.get('/articles', function(req, res){
-    Article.find({}, function(err, doc){    // grab every doc in the Articles array
-        // log any errors
-        if (err){
-            console.log(err);
-        } 
-        // or send the doc to the browser as a json object
-        else {
-            res.json(doc);
         }
     });
 });

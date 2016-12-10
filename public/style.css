@@ -2,7 +2,9 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Questrial', sans-serif;
-
+    background-image: url("jar_transparent.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
 }
 
 .navbar{

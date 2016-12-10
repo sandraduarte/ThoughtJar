@@ -31,6 +31,7 @@ router.get('/users/:username', function(req, res) {
     }, 'username _id').lean().exec(function(err, user) {
         res.render('user', {
             user: user
+
         });
     });// code to pull comments from DB breaks this
 });
@@ -43,7 +44,7 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', passport.authenticate('signup', {
-    successRedirect: '/',
+    successRedirect: '/articles',
     failureRedirect: '/signup/',
     failureFlash: false
 }));
@@ -56,7 +57,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('login', {
-    successRedirect: '/',
+    successRedirect: '/articles',
     failureRedirect: '/login',
     failureFlash: false
 }));
