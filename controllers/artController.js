@@ -85,6 +85,30 @@ router.get('/articles/:id/comments', function(req, res) {
   });
 });
 
+
+
+//DELETE COMMENT
+router.get('articles/:articleId/comments/:commentId/delete', function(req,res) {
+
+ // res.send(req.params);
+var articleId = req.params.article;
+var commentId = req.params._id;
+
+  Comment.remove({where: {_id: commentId}})
+    .then(function(){
+        res.redirect('/articles/'+ articleId + "/comments");
+    });
+});
+
+
+router.delete('/comments/:id/delete', function(req, res) {
+
+
+
+});
+
+////scrape////
+
 router.get('/scrape', function(req, res) {
     scrape();
 });

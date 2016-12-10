@@ -9,7 +9,8 @@ $(document).on('click', '.article', function(event) {
     $("#comments").empty();
 
     // pull the comments for the selected article from the database
-    var articleId = $(this).attr("data-id");
+     var articleId = $(this).attr("data-id");
+    
     $("#commentSubmit").attr("data-article", articleId);
     $.get("/articles/" + articleId + "/comments", function(comments) {
 
@@ -29,9 +30,19 @@ $(document).on('click', '.article', function(event) {
             commentUser.attr("href", "/users/" + comments[i].author);
             commentUser.text(comments[i].author);
 
+            var separator = (" | ");
+        
+            //remove comment button
+            var removeComment = $("<a>");
+            removeComment.attr("href", "/articles/" + comments[i].article + "/comments/" + comments[i]._id + "/delete");
+            removeComment.class('remove');
+            removeComment.text("Remove");
+
             // append elements to the div
             div.append(commentText);
             div.append(commentUser);
+            div.append(separator);
+            div.append(removeComment);
 
             // append the div to the comments page
             $("#comments").append(div);
@@ -49,7 +60,7 @@ $('div a').on('click', function(e){
 $("#commentSubmit").on('click',function() {
     var comment = {};
     // get the article ID
-    var articleId = $(this).attr("data-article");
+     articleId = $(this).attr("data-article");
     
     // get the comment text
     comment.text = $("#commentText").val().trim();
@@ -71,8 +82,11 @@ $(document).on('click', '.comment', function(event) {
     removeSelected();
     // apply 'selected' class to highlight article
     $(this).addClass("selected");
-
 });
+
+
+    
+
 
 function removeSelected() {
     $(".selected").each(function(i) {
