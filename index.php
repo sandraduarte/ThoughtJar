@@ -1,1 +1,1 @@
-<?php include_once("./views/login.handlebars"); ?>
+<?php include_once("./views/layouts/main.handlebars"); ?>
