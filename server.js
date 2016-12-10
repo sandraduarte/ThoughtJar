@@ -40,7 +40,7 @@ app.use(express.static('public'));
 
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/thoughtjar');
+mongoose.connect('mongodb://heroku_xsxfhqmq:78rf5sjuv08plqnajm716gprbb@ds127928.mlab.com:27928/heroku_xsxfhqmq');
 var db = mongoose.connection;
 
 // show any mongoose errors
