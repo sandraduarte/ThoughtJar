@@ -147,7 +147,7 @@ return new Promise (function (resolve, reject) {
 
                     if (found) {
                         // if article with same title is found, do not save the article in the database
-                        console.log('story already in database');
+                        console.log('This article exists.');
                     } else {
                         // if no match, save the article in the database
                         article.save(function(err, doc) {
