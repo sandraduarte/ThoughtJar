@@ -28,10 +28,21 @@ $(document).on('click', '.article', function(event) {
             var commentUser = $("<a>");
             commentUser.attr("href", "/users/" + comments[i].author);
             commentUser.text(comments[i].author);
+            
+            var separator = (" | ");
+
+            //remove comment button
+            var removeComment = $("<a>");
+            removeComment.attr("href", "/articles/" + articleId + "/comments/" + comments[i]._id + "/delete");
+            // removeComment.class('remove');
+            removeComment.text("Delete Thought");
 
             // append elements to the div
             div.append(commentText);
             div.append(commentUser);
+            div.append(separator);
+            div.append(removeComment);
+
 
             // append the div to the comments page
             $("#comments").append(div);
